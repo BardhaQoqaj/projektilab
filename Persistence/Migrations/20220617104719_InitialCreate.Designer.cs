@@ -9,7 +9,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220603181734_InitialCreate")]
+    [Migration("20220617104719_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,31 +18,31 @@ namespace Persistence.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.1");
 
-            modelBuilder.Entity("Domain.Books", b =>
+            modelBuilder.Entity("Domain.Book", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Titulli")
-                        .HasColumnType("TEXT");
-
-                     b.Property<int>("Faqet")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Disponueshmeria")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("Pershkrimi")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Kategoria")
+                    b.Property<string>("Botuesi")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Cmimi")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Botuesi")
+                    b.Property<string>("Disponueshmeria")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Faqet")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Kategoria")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Pershkrimi")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Titulli")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

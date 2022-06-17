@@ -18,11 +18,11 @@ namespace API.Controllers
             _context = context;
         }
         [HttpGet]
-        public async Task<ActionResult<List<Books>>> GetBooks() {
+        public async Task<ActionResult<List<Book>>> GetBooks() {
            return await _context.Books.ToListAsync();
         }
     [HttpGet("{id}")]
-    public async Task<ActionResult<Books>> GetBook(Guid id)
+    public async Task<ActionResult<Book>> GetBook(Guid id)
     {
         return await _context.Books.FindAsync(id);
 

@@ -12,9 +12,9 @@ namespace Persistence
         {
             if (context.Books.Any()) return;
             
-            var books = new List<Books>
+            var books = new List<Book>
             {
-                new Books
+                new Book
                 {
                     Titulli = "Zera nga Cernobili",
                     Faqet =256,
@@ -24,7 +24,7 @@ namespace Persistence
                     Botuesi ="Svetllana Aleksieviç",
                     Cmimi= 19,
                 },
-                new Books
+                new Book
                 {
                     Titulli = "Fuqia e shprehise",
                     Faqet =286,
@@ -34,7 +34,7 @@ namespace Persistence
                     Botuesi ="Charles Duhigg",
                     Cmimi= 22,
                 },
-                new Books
+                new Book
                 {
                     Titulli = "Pertej botes time",
                     Faqet =301,
@@ -44,7 +44,7 @@ namespace Persistence
                     Botuesi ="Sharon M.Draper",
                     Cmimi= 28,
                 },
-                new Books
+                new Book
                 {
                     Titulli = "Eleanor & Park nje here ne jete",
                     Faqet =200,
@@ -54,7 +54,7 @@ namespace Persistence
                     Botuesi ="Rainbow Rowell",
                     Cmimi= 24,
                 },
-                new Books
+                new Book
                 {
                     Titulli = "Tri bijat e Eves",
                     Faqet =216,
@@ -64,7 +64,7 @@ namespace Persistence
                     Botuesi ="Elif Shafak",
                     Cmimi= 18,
                 },
-                new Books
+                new Book
                 {
                     Titulli = "Te fitosh ne cdo negociate - NSA",
                     Faqet =230,
@@ -74,7 +74,7 @@ namespace Persistence
                     Botuesi =" Chris Voss",
                     Cmimi= 17,
                 },
-                new Books
+                new Book
                 {
                     Titulli = "Mendo dhe behu i pasur",
                     Faqet =211,
@@ -84,7 +84,7 @@ namespace Persistence
                     Botuesi =" Napoleon Hill",
                     Cmimi= 19,
                 },
-                new Books
+                new Book
                 {
                     Titulli = "Nje mije e nje net - Aeditions",
                     Faqet =359,
@@ -94,7 +94,7 @@ namespace Persistence
                     Botuesi ="Grup Autoresh",
                     Cmimi= 17,
                 },
-                new Books
+                new Book
                 {
                    Titulli = "Jeta qesharake e mesuesve",
                     Faqet =106,
@@ -104,7 +104,7 @@ namespace Persistence
                     Botuesi =" James Campbell",
                     Cmimi= 15,
                 },
-                new Books
+                new Book
                 {
                    Titulli = "Liza ne boten e cudirave",
                     Faqet =199,

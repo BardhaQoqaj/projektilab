@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public class Books
+    public class Book
     {
         public Guid Id { get; set; }
         public string Titulli { get; set; }

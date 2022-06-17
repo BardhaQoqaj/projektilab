@@ -16,29 +16,29 @@ namespace Persistence.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.1");
 
-            modelBuilder.Entity("Domain.Books", b =>
+            modelBuilder.Entity("Domain.Book", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Kategoria")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Botuesi")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("Faqet")
-                        .HasColumnType("INTEGER");
-
-                     b.Property<string>("Disponueshmeria")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Pershkrimi")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Cmimi")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Disponueshmeria")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Faqet")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Kategoria")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Pershkrimi")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Titulli")
                         .HasColumnType("TEXT");

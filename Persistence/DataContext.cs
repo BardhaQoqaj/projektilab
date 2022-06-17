@@ -12,6 +12,6 @@ namespace Persistence
         public DataContext( DbContextOptions options) : base(options)
         {
         }
-        public DbSet<Books> Books { get; set; }
+        public DbSet<Book> Books { get; set; }
     }
 }
