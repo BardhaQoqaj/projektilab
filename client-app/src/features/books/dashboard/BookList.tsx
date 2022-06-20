@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import { Button, Item, Label, Segment } from 'semantic-ui-react';
 import { Book } from "../../../app/models/book";
 
@@ -7,7 +7,7 @@ interface Props{
     selectBook: (id: string) => void;
     deleteBook: (id: string) => void;
 }
-export default function BookList(books, selectBook, deleteBook }: Props) {
+export default function BookList({books, selectBook, deleteBook } : Props) {
     return(
         <Segment>
             <Item.Group devided>

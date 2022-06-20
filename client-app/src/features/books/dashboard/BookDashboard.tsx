@@ -1,9 +1,9 @@
 import React from "react";
-import { Grid, List } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import { Book } from "../../../app/models/book";
 import BookList from "./BookList";
 import BookDetails from '../details/BookDetails';
-import BoookForm from '../form/BookForm';
+import BookForm from '../form/BookForm';
 
 interface Props {
     books: Book[];
@@ -35,7 +35,8 @@ export default function BookDashboard({books, selectedBook, deleteBook,
                     openForm={openForm} 
                 />}
                 {editMode &&
-                <BookForm closeForm={closeForm} book={selectedBook} createOrEdit={createOrEdit} />}
+                <BookForm closeForm={closeForm} book={selectedBook} createOrEdit={createOrEdit} 
+                />}
             </Grid.Column>
         </Grid>
     )

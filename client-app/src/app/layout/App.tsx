@@ -1,6 +1,6 @@
-import React,{Fragment, useEffect, useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import axios from 'axios';
-import { Container, Header, List } from 'semantic-ui-react';
+import { Container} from 'semantic-ui-react';
 import { Book } from '../models/book';
 import NavBar from './NavBar';
 import BookDashboard from '../../features/books/dashboard/BookDashboard';
@@ -33,10 +33,12 @@ function handleFormOpen(id?: string) {
 function handleFormClose() {
   setEditMode(false);
 }
-function handleCreateOrEditBook(bbook: Book) {
+function handleCreateOrEditBook(book: Book) {
   book.id 
-    ? setBook([...books.filter(x => x.id !== book.id), book])
+    
+    ? setBooks([...books.filter(x => x.id !== book.id), book])
     : setBooks([...books, {...book, id: uuid()}]);
+    
   setEditMode(false);
   setSelectedBook(book);
 }
@@ -47,8 +49,8 @@ function handleDeleteBook(id: string) {
   return (
     <>
       <NavBar openForm={handleFormOpen} />
-      <Container style={{marginTop: '7em'}}>
-      <BookDashboard  
+      <Container style={{marginTop: '7em'}}> 
+            <BookDashboard  
           books={books} 
           selectedBook={selectedBook}
           selectBook={handleSelectBook}
