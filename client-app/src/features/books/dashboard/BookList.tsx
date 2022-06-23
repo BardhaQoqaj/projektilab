@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 import { Button, Item, Label, Segment } from 'semantic-ui-react';
 import { Book } from "../../../app/models/book";
 
-interface Props{
+interface Props {
     books: Book[];
     selectBook: (id: string) => void;
     deleteBook: (id: string) => void;
+    submitting: boolean;
 }
-export default function BookList({books, selectBook, deleteBook } : Props) {
+export default function BookList({books, selectBook, deleteBook,submitting }: Props) {
+   // export default function BookList({ books, selectBook, deleteBook, submitting }: Props) {
+    const [target, setTarget] = useState('');
+        
+        function handleBookDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
+            setTarget(e.currentTarget.name);
+            deleteBook(id);
+        }
     return(
         <Segment>
             <Item.Group devided>
@@ -22,7 +30,15 @@ export default function BookList({books, selectBook, deleteBook } : Props) {
                             </Item.Description>
                             <Item.Extra>
                                 <Button onClick={() => selectBook(book.id)} floated='right' content='View' color='blue' />
-                                <Button onClick={() => deleteBook(book.id)} floated='right' content='Delete' color='red' />
+                               {/* <Button loading={submitting} onClick={() => deleteBook(book.id)} floated='right' content='Delete' color='red' /> */}
+                                <Button 
+                                    name={book.id}
+                                    loading={submitting && target === book.id} 
+                                    onClick={(e) => handleBookDelete(e, book.id)} 
+                                    floated='right' 
+                                    content='Delete' 
+                                    color='red' 
+                                /> 
                                 <Label basic content={book.kategoria} />
                             </Item.Extra>
                         </Item.Content>
@@ -31,5 +47,4 @@ export default function BookList({books, selectBook, deleteBook } : Props) {
             </Item.Group>
         </Segment>
     )
-
-}
+              }             

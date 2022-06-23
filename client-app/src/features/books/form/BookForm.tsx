@@ -6,9 +6,10 @@ interface Props {
     book: Book | undefined;
     closeForm: () => void;
     createOrEdit: (book: Book) => void;
+    submitting: boolean;
 }
 
-export default function BookForm({book: selectedBook, closeForm, createOrEdit}: Props) {
+export default function BookForm({book: selectedBook, closeForm, createOrEdit,submitting}: Props) {
 
     const initialState = selectedBook ?? {
         id: '',
@@ -44,6 +45,7 @@ export default function BookForm({book: selectedBook, closeForm, createOrEdit}: 
                 <Form.Input placeholder='Botuesi' value={book.botuesi} name='botuesi' onChange={handleInputChange}/>
                 <Form.Input placeholder='Disponueshmeria' value={book.disponueshmeria} name='disponueshmeria' onChange={handleInputChange}/>
                 <Button floated='right' positive type='submit' content='Submit' />
+                <Button loading={submitting} floated='right' positive type='submit' content='Submit' />
                 <Button onClick={closeForm} floated='right' type='button' content='Cancel' />
             </Form>
         </Segment>
