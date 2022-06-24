@@ -1,15 +1,18 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Button, Form, Segment } from 'semantic-ui-react';
 import { Book } from '../../../app/models/book';
+import { useStore } from '../../../app/stores/store';
+import { observer } from 'mobx-react-lite';
 
 interface Props {
-    book: Book | undefined;
-    closeForm: () => void;
+   
     createOrEdit: (book: Book) => void;
     submitting: boolean;
 }
 
-export default function BookForm({book: selectedBook, closeForm, createOrEdit,submitting}: Props) {
+export default function BookForm({ createOrEdit,submitting}: Props) {
+const {bookStore}= useStore();
+const {selectedBook,closeForm}=bookStore;
 
     const initialState = selectedBook ?? {
         id: '',

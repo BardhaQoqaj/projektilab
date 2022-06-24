@@ -4,6 +4,8 @@ import { Book } from "../../../app/models/book";
 import BookList from "./BookList";
 import BookDetails from '../details/BookDetails';
 import BookForm from '../form/BookForm';
+import { useStore } from '../../../app/stores/store';
+import { observer } from 'mobx-react-lite';
 
 interface Props {
     books: Book[];
@@ -18,28 +20,25 @@ interface Props {
     submitting: boolean;
 }   
 
-export default function BookDashboard({books, selectedBook, deleteBook,
-    selectBook, cancelSelectBook, editMode, openForm, closeForm, createOrEdit,submitting}: Props){
+export default observer(function BookDashboard({books, deleteBook,
+    createOrEdit,submitting}: Props){
+
+    const {bookStore} = useStore();
+    const {selectedBook, editMode} = bookStore;
     return(
         <Grid>
             <Grid.Column width='10'>
           <BookList books={books} 
-          selectBook={selectBook} 
           deleteBook={deleteBook}
           submitting={submitting}
                 />
             </Grid.Column>
             <Grid.Column width='6'>
                 {selectedBook && !editMode &&
-                <BookDetails 
-                    book={selectedBook} 
-                    cancelSelectBook={cancelSelectBook}
-                    openForm={openForm} 
+                <BookDetails  
                 />}
                 {editMode &&
-                <BookForm 
-                 closeForm={closeForm} 
-                 book={selectedBook}
+                <BookForm
                  createOrEdit={createOrEdit} 
                  submitting={submitting} 
                 />}
@@ -47,4 +46,4 @@ export default function BookDashboard({books, selectedBook, deleteBook,
         </Grid>
     )
             
-}
+})

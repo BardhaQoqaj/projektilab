@@ -6,27 +6,20 @@ import BookDashboard from '../../features/books/dashboard/BookDashboard';
 import {v4 as uuid} from 'uuid';
 import agent from '../api/agent';
 import LoadingComponent from './LoadingComponent';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../stores/store';
+
 
 function App() {
+const {bookStore}=useStore();
 const[books, setBooks]=useState<Book[]>([]);
 const [selectedBook, setSelectedBook] = useState<Book| undefined>(undefined);
 const [editMode, setEditMode] = useState(false);
-const[loading,setLoading]=useState(true);
 const [submitting, setSubmitting] = useState(false);
 
 useEffect(()=>{
-  agent.Books.list().then(response => {
-    let books: Book[]=[];
-    response.forEach(book => {
-     //book.cmimi = book.cmimi.split('T')[0];
-     books.push(book);
-    })
-
-  setBooks(books);
-  setLoading(false);
-
-  })
-}, [])
+  bookStore.loadBooks();
+}, [bookStore])
 
 function handleSelectBook(id: string) {
   setSelectedBook(books.find(x => x.id === id));
@@ -71,7 +64,6 @@ if (book.id) {
 
 
 function handleDeleteBook(id: string) {
-  setBooks([...books.filter(x => x.id !== id)])
   setSubmitting(true);
   agent.Books.delete(id).then(() => {
     setBooks([...books.filter(x => x.id !== id)]);
@@ -79,19 +71,13 @@ function handleDeleteBook(id: string) {
   })
 
 }
-if(loading) return <LoadingComponent content='Loading App'/>
+if(bookStore.loadingInitial) return <LoadingComponent content='Loading App'/>
   return (
     <>
-      <NavBar openForm={handleFormOpen} />
+      <NavBar />
       <Container style={{marginTop: '7em'}}> 
             <BookDashboard  
-          books={books} 
-          selectedBook={selectedBook}
-          selectBook={handleSelectBook}
-          cancelSelectBook={handleCancelSelectBook}
-          editMode={editMode}
-          openForm={handleFormOpen}
-          closeForm={handleFormClose}
+          books={bookStore.books} 
           createOrEdit={handleCreateOrEditBook}
           deleteBook={handleDeleteBook}
           submitting={submitting}
@@ -102,20 +88,6 @@ if(loading) return <LoadingComponent content='Loading App'/>
       );
       }
 
-      /*
-      </List>
-      <header>
-      <ul>
-      {books.map((book : any) => (
-          <li key={book.id}>
-            {book.titulli}
-            </li>
-            ))}
-      </ul>
-      </header>
-    </div>
-  );
-}
-*/
+  
 
-export default App;
+export default observer (App);

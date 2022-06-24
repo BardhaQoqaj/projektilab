@@ -7,7 +7,9 @@ import reportWebVitals from './reportWebVitals';
 
 
 ReactDOM.render(
-  <App />,
+  <StoreContext.Provider value={store}>
+<App />
+  </StoreContext.Provider>,
   document.getElementById('root')
 );
 
