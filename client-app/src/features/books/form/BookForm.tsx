@@ -4,15 +4,10 @@ import { Book } from '../../../app/models/book';
 import { useStore } from '../../../app/stores/store';
 import { observer } from 'mobx-react-lite';
 
-interface Props {
-   
-    createOrEdit: (book: Book) => void;
-    submitting: boolean;
-}
 
-export default function BookForm({ createOrEdit,submitting}: Props) {
+export default observer(function BookForm() {
 const {bookStore}= useStore();
-const {selectedBook,closeForm}=bookStore;
+const {selectedBook,closeForm, createBook, updateBook,loading}=bookStore;
 
     const initialState = selectedBook ?? {
         id: '',
@@ -29,7 +24,7 @@ const {selectedBook,closeForm}=bookStore;
     const [book, setBook] = useState(initialState);
 
     function handleSubmit() {
-        createOrEdit(book);
+       book.id ? updateBook(book) : createBook(book);
     }
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
@@ -48,9 +43,9 @@ const {selectedBook,closeForm}=bookStore;
                 <Form.Input placeholder='Botuesi' value={book.botuesi} name='botuesi' onChange={handleInputChange}/>
                 <Form.Input placeholder='Disponueshmeria' value={book.disponueshmeria} name='disponueshmeria' onChange={handleInputChange}/>
                 <Button floated='right' positive type='submit' content='Submit' />
-                <Button loading={submitting} floated='right' positive type='submit' content='Submit' />
+                <Button loading={loading} floated='right' positive type='submit' content='Submit' />
                 <Button onClick={closeForm} floated='right' type='button' content='Cancel' />
             </Form>
         </Segment>
     )
-} 
+} )

@@ -4,21 +4,19 @@ import { Book } from "../../../app/models/book";
 import { useStore } from '../../../app/stores/store';
 import { observer } from 'mobx-react-lite';
 
-interface Props {
-    books: Book[];
-    deleteBook: (id: string) => void;
-    submitting: boolean;
-}
-export default function BookList({books,deleteBook,submitting }: Props) {
-   // export default function BookList({ books, selectBook, deleteBook, submitting }: Props) {
+export default observer(function BookList() {
+   
+    const {bookStore} = useStore();
+    const{deleteBook, books ,loading }=bookStore;
+
     const [target, setTarget] = useState('');
-        
+
         function handleBookDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
             setTarget(e.currentTarget.name);
             deleteBook(id);
         }
 
-        const {bookStore} = useStore();
+        
 
     return(
         <Segment>
@@ -37,7 +35,7 @@ export default function BookList({books,deleteBook,submitting }: Props) {
                                {/* <Button loading={submitting} onClick={() => deleteBook(book.id)} floated='right' content='Delete' color='red' /> */}
                                 <Button 
                                     name={book.id}
-                                    loading={submitting && target === book.id} 
+                                    loading={loading && target === book.id} 
                                     onClick={(e) => handleBookDelete(e, book.id)} 
                                     floated='right' 
                                     content='Delete' 
@@ -51,4 +49,4 @@ export default function BookList({books,deleteBook,submitting }: Props) {
             </Item.Group>
         </Segment>
     )
-              }             
+              } )            

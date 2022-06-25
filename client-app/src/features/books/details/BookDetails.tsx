@@ -7,7 +7,7 @@ import { useStore } from '../../../app/stores/store';
 export default function BookDetails( ) {
     const {bookStore} = useStore();
     const {selectedBook: book, openForm, cancelSelectedBook} = bookStore;
-    if (!book) return <LoadingComponent/>;
+    if (!book) return <LoadingComponent />;
     return (
         <Card fluid>
             <Image src={`/assets/categoryImages/${book.kategoria}.jpg`} />
