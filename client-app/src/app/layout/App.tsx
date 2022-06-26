@@ -1,30 +1,35 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import { Container} from 'semantic-ui-react';
 import NavBar from './NavBar';
 import BookDashboard from '../../features/books/dashboard/BookDashboard';
-import LoadingComponent from './LoadingComponent';
 import { observer } from 'mobx-react-lite';
-import { useStore } from '../stores/store';
-
+import { Route, useLocation } from 'react-router-dom';
+import HomePage from '../../features/home/HomePage';
+import BookForm from '../../features/books/form/BookForm';
+import BookDetails from '../../features/books/details/BookDetails';
 
 function App() {
-const {bookStore}=useStore();
+  const location = useLocation();
 
-useEffect(()=>{
-  bookStore.loadBooks();
-}, [bookStore])
-
-if(bookStore.loadingInitial) return <LoadingComponent content='Loading App'/>
   return (
     <>
-      <NavBar />
-      <Container style={{marginTop: '7em'}}> 
-            <BookDashboard   />
-      </Container>
-
-      </>
-      );
-      }
+      <Route path='/' element={HomePage}/>
+            <Route
+            path={'/(.+)'}
+            render={() => (
+            <>
+           <NavBar />
+            <Container style={{ marginTop: '7em' }}>
+              <Route path='/books' element={BookDashboard} />
+              <Route path='/books/:id' element={BookDetails} />
+              <Route key={location.key} path={['/createBook', '/manage/:id']} element={BookForm} />
+            </Container>
+            </>
+        )}
+      />
+    </>
+  );
+}
 
   
 

@@ -1,20 +1,20 @@
 import React from "react";
 import { Button,Container, Menu } from "semantic-ui-react";
 import { useStore } from '../stores/store';
-
+import { NavLink } from 'react-router-dom';
 
 export default function NavBar(){
-    const {bookStore} = useStore();
+  
     return (
         <Menu inverted fixed='top'>
             <Container>
-                <Menu.Item header>
+                <Menu.Item as={NavLink} to='/' header>
                     <img src="/assets/logo.jpg" alt="logo" style={{marginRight: '10px'}}/>
                     Books
                 </Menu.Item>
-                <Menu.Item name='Books' />
+                <Menu.Item as={NavLink} to='/books'name='Books' />
                 <Menu.Item>
-                    <Button onClick={()=> bookStore.openForm()} positive content='Create Book'/>
+                    <Button as={NavLink} to='/createBook' positive content='Create Book'/>
                 </Menu.Item>
             </Container>
         </Menu>
