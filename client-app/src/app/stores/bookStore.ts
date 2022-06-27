@@ -12,7 +12,13 @@ export default class BookStore {
     constructor() {
         makeAutoObservable(this)
     }
+
+    // get booksByCategory() {
+    //     return Array.from(this.bookRegistry.values()).sort((a,b)) =>
+    //     Category.parse(a.kategoria) - Category.parse(b.kategoria));
+    // }
    
+ 
 
     loadBooks = async () => {
         this.loadingInitial = true;

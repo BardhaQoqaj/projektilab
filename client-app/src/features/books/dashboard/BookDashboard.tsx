@@ -9,10 +9,11 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 export default observer(function BookDashboard(){
 
     const {bookStore} = useStore();
+    const{loadBooks, bookRegistry} = bookStore;
 
 useEffect(()=>{
-  bookStore.loadBooks();
-}, [bookStore])
+ if(bookRegistry.size <= 1) loadBooks();
+}, [bookRegistry.size, loadBooks])
 
 if(bookStore.loadingInitial) return <LoadingComponent content='Loading App'/>
     return(

@@ -3,7 +3,7 @@ import { Button, Form, Segment } from 'semantic-ui-react';
 import { Book } from '../../../app/models/book';
 import { useStore } from '../../../app/stores/store';
 import { observer } from 'mobx-react-lite';
-import { Navigate, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { v4 as uuid } from 'uuid';
 import {useNavigate } from 'react-router-dom';
@@ -63,7 +63,7 @@ useEffect(() => {
                 <Form.Input placeholder='Disponueshmeria' value={book.disponueshmeria} name='disponueshmeria' onChange={handleInputChange}/>
                 <Button floated='right' positive type='submit' content='Submit' />
                 <Button loading={loading} floated='right' positive type='submit' content='Submit' />
-                <Button  floated='right' type='button' content='Cancel' />
+                <Button as={Link} to='/books' floated='right' type='button' content='Cancel' />
             </Form>
         </Segment>
     )
