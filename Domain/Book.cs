@@ -1,13 +1,12 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace Domain
 {
     public class Book
     {
         public Guid Id { get; set; }
+
         public string Titulli { get; set; }
         public int Faqet { get; set; }
         public string Disponueshmeria { get; set; }
