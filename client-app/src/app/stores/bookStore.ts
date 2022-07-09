@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import agent from "../api/agent";
+ import {agent} from "../api/agent";
 import { Book} from "../models/book";
 
 export default class BookStore {
@@ -24,7 +24,7 @@ export default class BookStore {
         this.loadingInitial = true;
         try {
             const books = await agent.Books.list();
-            books.forEach(book => {
+            books.forEach((book: Book) => {
                // book.date = book.date.split('T')[0];
                this.setBook(book);
             })
