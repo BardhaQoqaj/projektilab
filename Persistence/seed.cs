@@ -9,25 +9,37 @@ namespace Persistence
 {
     public class Seed
     {
-        public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
+        public static async Task SeedData(DataContext context,
+            UserManager<AppUser> userManager)
         {
-            if (!userManager.Users.Any())
+            if (!userManager.Users.Any() && !context.Books.Any())
             {
-                var users= new List<AppUser>
+                var users = new List<AppUser>
                 {
-                    new AppUser{DisplayName="Bob" , UserName="bob", Email="bob@test.com"},
-                    new AppUser{DisplayName="Tom" , UserName="tom", Email="tom@test.com"},
-                    new AppUser{DisplayName="Jane" , UserName="jane", Email="jane@test.com"},
+                    new AppUser
+                    {
+                        DisplayName = "Bob",
+                        UserName = "bob",
+                        Email = "bob@test.com"
+                    },
+                    new AppUser
+                    {
+                        DisplayName = "Jane",
+                        UserName = "jane",
+                        Email = "jane@test.com"
+                    },
+                    new AppUser
+                    {
+                        DisplayName = "Tom",
+                        UserName = "tom",
+                        Email = "tom@test.com"
+                    },
                 };
 
                 foreach (var user in users)
                 {
-                     await userManager.CreateAsync(user, "Pa$$w0rd");
+                    await userManager.CreateAsync(user, "Pa$$w0rd");
                 }
-                 
-            }
-
-            if (context.Books.Any()) return;
             
             var books = new List<Book>
             {
@@ -40,7 +52,16 @@ namespace Persistence
                     Kategoria = "Roman",
                     Botuesi ="Svetllana Aleksieviç",
                     Cmimi= 19,
-                },
+                    Readers = new List<BookReader>
+                        {
+                            new BookReader
+                            {
+                                AppUser = users[0],
+                                IsHost = true
+                            }
+                        }
+                    },
+                
                 new Book
                 {
                     Titulli = "Fuqia e shprehise",
@@ -50,7 +71,20 @@ namespace Persistence
                     Kategoria = "Roman",
                     Botuesi ="Charles Duhigg",
                     Cmimi= 22,
-                },
+                    Readers = new List<BookReader>
+                        {
+                            new BookReader
+                            {
+                                AppUser = users[0],
+                                IsHost = true
+                            },
+                            new BookReader
+                            {
+                                AppUser = users[1],
+                                IsHost = false
+                            },
+                        }
+                    },
                 new Book
                 {
                     Titulli = "Pertej botes time",
@@ -60,7 +94,20 @@ namespace Persistence
                     Kategoria = "Roman",
                     Botuesi ="Sharon M.Draper",
                     Cmimi= 28,
-                },
+                    Readers = new List<BookReader>
+                        {
+                            new BookReader
+                            {
+                                AppUser = users[2],
+                                IsHost = true
+                            },
+                            new BookReader
+                            {
+                                AppUser = users[1],
+                                IsHost = false
+                            },
+                        }
+                    },
                 new Book
                 {
                     Titulli = "Eleanor & Park nje here ne jete",
@@ -70,7 +117,20 @@ namespace Persistence
                     Kategoria = "Roman",
                     Botuesi ="Rainbow Rowell",
                     Cmimi= 24,
-                },
+                    Readers = new List<BookReader>
+                        {
+                            new BookReader
+                            {
+                                AppUser = users[0],
+                                IsHost = true
+                            },
+                            new BookReader
+                            {
+                                AppUser = users[2],
+                                IsHost = false
+                            },
+                        }
+                    },
                 new Book
                 {
                     Titulli = "Tri bijat e Eves",
@@ -80,7 +140,20 @@ namespace Persistence
                     Kategoria = "Novele",
                     Botuesi ="Elif Shafak",
                     Cmimi= 18,
-                },
+                    Readers = new List<BookReader>
+                        {
+                            new BookReader
+                            {
+                                AppUser = users[1],
+                                IsHost = true
+                            },
+                            new BookReader
+                            {
+                                AppUser = users[0],
+                                IsHost = false
+                            },
+                        }
+                    },
                 new Book
                 {
                     Titulli = "Te fitosh ne cdo negociate - NSA",
@@ -90,7 +163,16 @@ namespace Persistence
                     Kategoria = "Roman",
                     Botuesi =" Chris Voss",
                     Cmimi= 17,
-                },
+                    Readers = new List<BookReader>
+                        {
+                            new BookReader
+                            {
+                                AppUser = users[1],
+                                IsHost = true
+                            }
+                            
+                        }
+                    },
                 new Book
                 {
                     Titulli = "Mendo dhe behu i pasur",
@@ -100,7 +182,20 @@ namespace Persistence
                     Kategoria = "Roman",
                     Botuesi =" Napoleon Hill",
                     Cmimi= 19,
-                },
+                    Readers = new List<BookReader>
+                        {
+                            new BookReader
+                            {
+                                AppUser = users[0],
+                                IsHost = true
+                            },
+                            new BookReader
+                            {
+                                AppUser = users[1],
+                                IsHost = false
+                            },
+                        }
+                    },
                 new Book
                 {
                     Titulli = "Nje mije e nje net - Aeditions",
@@ -110,7 +205,20 @@ namespace Persistence
                     Kategoria = "Perralla",
                     Botuesi ="Grup Autoresh",
                     Cmimi= 17,
-                },
+                    Readers = new List<BookReader>
+                        {
+                            new BookReader
+                            {
+                                AppUser = users[2],
+                                IsHost = true
+                            },
+                            new BookReader
+                            {
+                                AppUser = users[1],
+                                IsHost = false
+                            },
+                        }
+                    },
                 new Book
                 {
                    Titulli = "Jeta qesharake e mesuesve",
@@ -120,7 +228,20 @@ namespace Persistence
                     Kategoria = "Libra per femije",
                     Botuesi =" James Campbell",
                     Cmimi= 15,
-                },
+                    Readers = new List<BookReader>
+                        {
+                            new BookReader
+                            {
+                                AppUser = users[0],
+                                IsHost = true
+                            },
+                            new BookReader
+                            {
+                                AppUser = users[2],
+                                IsHost = false
+                            },
+                        }
+                    },
                 new Book
                 {
                    Titulli = "Liza ne boten e cudirave",
@@ -130,11 +251,26 @@ namespace Persistence
                     Kategoria = "Roman per femije",
                     Botuesi ="Lewis Caroll",
                     Cmimi= 19,
-                }
+                    Readers = new List<BookReader>
+                        {
+                            new BookReader
+                            {
+                                AppUser = users[2],
+                                IsHost = true
+                            },
+                            new BookReader
+                            {
+                                AppUser = users[1],
+                                IsHost = false
+                            },
+                        }
+                    },
             };
 
            await context.Books.AddRangeAsync(books);
             await context.SaveChangesAsync();
         }
     }
+ }
+    
 }

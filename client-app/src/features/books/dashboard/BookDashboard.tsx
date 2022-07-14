@@ -15,7 +15,7 @@ useEffect(()=>{
  if(bookRegistry.size <= 1) loadBooks();
 }, [bookRegistry.size, loadBooks])
 
-if(bookStore.loadingInitial) return <LoadingComponent content='Loading App'/>
+if(bookStore.loadingInitial) return <LoadingComponent content='Loading Books...'/>
     return(
         <Grid>
             <Grid.Column width='10'>

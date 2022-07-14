@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Books;
 using Domain;
@@ -9,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    
     public class BooksController : BaseApiController
     {
        
@@ -30,6 +30,7 @@ namespace API.Controllers
           return HandleResult(await Mediator.Send(new Create.Command {Book = book}));
         }
 
+        [Authorize(Policy="IsBookHost")]
         [HttpPut("{id}")]
 
         public async Task<IActionResult> EditBook(Guid id, Book book)
@@ -38,6 +39,7 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Edit.Command{Book = book}));
         }
 
+        [Authorize(Policy="IsBookHost")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBook(Guid id)
         {
